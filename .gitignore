@@ -32,3 +32,6 @@ dist/
 # IDE specific
 *.idea/
 *.vscode/
+
+# Dependency directories
+lib/
