@@ -69,77 +69,78 @@ public class BasicStackOperations {
     }
 
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        int size = 0;
+        try (Scanner input = new Scanner(System.in)) {
+            int size = 0;
 
-        // Input the size of the stack
-        while (true) {
-            try {
-                System.out.print("Enter the size of the stack: ");
-                size = scanner.nextInt();
-                if (size <= 0) {
-                    System.out.println("Size must be positive. Please try again.");
+            // Input the size of the stack
+            while (true) {
+                try {
+                    System.out.print("Enter the size of the stack: ");
+                    size = input.nextInt();
+                    if (size <= 0) {
+                        System.out.println("Size must be positive. Please try again.");
+                        continue;
+                    }
+                    break;
+                } catch (InputMismatchException e) {
+                    System.out.println("Invalid input. Please enter an integer.");
+                    input.next(); // Clear the invalid input
+                }
+            }
+
+            BasicStackOperations stack = new BasicStackOperations(size);
+
+            // Menu for stack operations
+            while (true) {
+                System.out.println("\nStack Operations Menu:");
+                System.out.println("1. Push");
+                System.out.println("2. Pop");
+                System.out.println("3. Peek");
+                System.out.println("4. Display");
+                System.out.println("5. Exit");
+                System.out.print("Choose an operation: ");
+
+                int choice = -1;
+                try {
+                    choice = input.nextInt();
+                } catch (InputMismatchException e) {
+                    System.out.println("Invalid input. Please enter a number between 1 and 5.");
+                    input.next(); // Clear the invalid input
                     continue;
                 }
-                break;
-            } catch (InputMismatchException e) {
-                System.out.println("Invalid input. Please enter an integer.");
-                scanner.next(); // Clear the invalid input
-            }
-        }
 
-        BasicStackOperations stack = new BasicStackOperations(size);
-
-        // Menu for stack operations
-        while (true) {
-            System.out.println("\nStack Operations Menu:");
-            System.out.println("1. Push");
-            System.out.println("2. Pop");
-            System.out.println("3. Peek");
-            System.out.println("4. Display");
-            System.out.println("5. Exit");
-            System.out.print("Choose an operation: ");
-
-            int choice = -1;
-            try {
-                choice = scanner.nextInt();
-            } catch (InputMismatchException e) {
-                System.out.println("Invalid input. Please enter a number between 1 and 5.");
-                scanner.next(); // Clear the invalid input
-                continue;
-            }
-
-            switch (choice) {
-                case 1:
-                    System.out.print("Enter value to push: ");
-                    try {
-                        int value = scanner.nextInt();
-                        stack.push(value);
-                    } catch (InputMismatchException e) {
-                        System.out.println("Invalid input. Please enter an integer.");
-                        scanner.next(); // Clear the invalid input
-                    }
-                    break;
-                case 2:
-                    int poppedValue = stack.pop();
-                    if (poppedValue != -1) {
-                        System.out.println("Popped value: " + poppedValue);
-                    }
-                    break;
-                case 3:
-                    int peekedValue = stack.peek();
-                    if (peekedValue != -1) {
-                        System.out.println("Top value: " + peekedValue);
-                    }
-                    break;
-                case 4:
-                    stack.display();
-                    break;
-                case 5:
-                    System.out.println("Exiting.");
-                    return;
-                default:
-                    System.out.println("Invalid choice. Please choose a number between 1 and 5.");
+                switch (choice) {
+                    case 1:
+                        System.out.print("Enter value to push: ");
+                        try {
+                            int value = input.nextInt();
+                            stack.push(value);
+                        } catch (InputMismatchException e) {
+                            System.out.println("Invalid input. Please enter an integer.");
+                            input.next(); // Clear the invalid input
+                        }
+                        break;
+                    case 2:
+                        int poppedValue = stack.pop();
+                        if (poppedValue != -1) {
+                            System.out.println("Popped value: " + poppedValue);
+                        }
+                        break;
+                    case 3:
+                        int peekedValue = stack.peek();
+                        if (peekedValue != -1) {
+                            System.out.println("Top value: " + peekedValue);
+                        }
+                        break;
+                    case 4:
+                        stack.display();
+                        break;
+                    case 5:
+                        System.out.println("Exiting.");
+                        return;
+                    default:
+                        System.out.println("Invalid choice. Please choose a number between 1 and 5.");
+                }
             }
         }
     }
