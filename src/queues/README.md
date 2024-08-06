@@ -29,7 +29,7 @@ Implementation of a circular queue which uses a fixed-size buffer in a circular 
 
 Implementation of a priority queue where each element is assigned a priority and elements are served based on their priority.
 
-- [PriorityQueue.java](PriorityQueue.java)
+- [PriorityQueueOperations.java](PriorityQueueOperations.java)
 
 ## Deque (Double-Ended Queue)
 
